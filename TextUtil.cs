@@ -10,16 +10,21 @@ namespace Alpha_Top10Words
     {
         private const string wordPattern = @"\b\w+\b";
         internal static Dictionary<string, int> FindDuplicates(List<string> words)
-        {
-            return words.GroupBy(element => element, StringComparer.InvariantCultureIgnoreCase) //group all identical words, regardless of case
+        { 
+            //group all identical words, regardless of case
+            return words.GroupBy(element => element, StringComparer.InvariantCultureIgnoreCase)
                         .Where(element => element.Count() > 1)
                         .ToDictionary(x => x.Key, y => y.Count());
         }
 
         internal static string ReadFile()
         {
-            var txtFile = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.txt");
-            if(txtFile.Count() == 1)
+            var txtFile = Directory.GetFiles(AppContext.BaseDirectory, "*.txt");
+#if DEBUG
+            //If executing in VisualStudio debugger; .exe will be in bin folder, rather than if executed from the project folder with DOTNET RUN cli 
+            txtFile = Directory.GetFiles("../../../", "*.txt"); 
+#endif
+            if (txtFile.Count() == 1)
             {
                 Console.WriteLine("Reading Text file..");
                 return File.ReadAllText(txtFile[0]); 

@@ -10,7 +10,6 @@ namespace Alpha_Top10Words
         private static string directory = Directory.GetCurrentDirectory();
         static void Main(string[] args)
         {
-            Console.WriteLine("Put text file in application .exe Root directory: " + directory);
             try
             {
                 DisplayWordCount();    

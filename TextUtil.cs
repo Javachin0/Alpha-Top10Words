@@ -19,10 +19,11 @@ namespace Alpha_Top10Words
 
         internal static string ReadFile()
         {
-            var txtFile = Directory.GetFiles(AppContext.BaseDirectory, "*.txt");
+            var txtFile = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.txt");
 #if DEBUG
-            //If executing in VisualStudio debugger; .exe will be in bin folder, rather than if executed from the project folder with DOTNET RUN cli 
-            txtFile = Directory.GetFiles("../../../", "*.txt"); 
+            //If executing in VisualStudio debugger; .exe will be in bin/debug folder           
+            Console.WriteLine("In debug");
+            txtFile = Directory.GetFiles(AppContext.BaseDirectory + "../../../", "*.txt"); 
 #endif
             if (txtFile.Count() == 1)
             {
